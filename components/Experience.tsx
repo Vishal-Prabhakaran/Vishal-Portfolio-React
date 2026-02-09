@@ -52,11 +52,15 @@ const Experience: React.FC = () => {
   const activeExperience = experiences[activeTab];
 
   return (
-    <section ref={ref} id="experience" className="py-24 md:py-32">
-      <div className={`transition-opacity duration-1000 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+    <section ref={ref} id="experience" className="py-24 md:py-32 relative">
+      {/* Background Effects */}
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div className={`relative z-10 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         
         <h2 className="text-3xl font-bold text-dark-text mb-8 font-mono flex items-center">
-          <span className="text-accent mr-4">02.</span>Where I've Worked
+          <span className="text-accent mr-4">02.</span>
+          <span className="gradient-text">Where I've Worked</span>
           <span className="ml-6 h-px w-24 md:w-64 bg-dark-text-secondary/30"></span>
         </h2>
 
@@ -68,46 +72,63 @@ const Experience: React.FC = () => {
               <button
                 key={exp.company}
                 onClick={() => setActiveTab(index)}
-                className={`w-full text-left px-4 py-3 font-mono text-sm whitespace-nowrap transition-all duration-300 
+                className={`w-full text-left px-6 py-4 font-mono text-sm whitespace-nowrap transition-all duration-300 
                   ${activeTab === index
-                    ? 'text-accent bg-dark-card/50 border-accent md:border-l-2 -ml-px'
-                    : 'text-dark-text-secondary hover:text-accent hover:bg-dark-card/30 border-dark-card'
+                    ? 'text-accent bg-dark-card/80 border-accent md:border-l-2 -ml-px shadow-lg'
+                    : 'text-dark-text-secondary hover:text-accent hover:bg-dark-card/40 border-dark-card'
                   }`}
               >
-                {exp.company}
+                <span className="flex items-center gap-3">
+                  {activeTab === index && (
+                    <span className="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+                  )}
+                  {exp.company}
+                </span>
               </button>
             ))}
           </div>
 
           {/* RIGHT SIDE CONTENT */}
-          <div className="flex-grow">
-            <h3 className="text-2xl font-bold text-accent mb-4">
-              {activeExperience.company}
-            </h3>
+          <div className="flex-grow relative">
+            {/* Animated Border */}
+            <div className="absolute -inset-4 bg-gradient-to-r from-accent/10 via-transparent to-accent/10 rounded-xl blur-lg opacity-0 transition-opacity duration-500"></div>
+            
+            <div className="relative">
+              <h3 className="text-2xl font-bold text-dark-text mb-2">
+                {activeExperience.company}
+              </h3>
+              
+              <div className="space-y-8">
+                {activeExperience.roles.map((role, idx) => (
+                  <div key={idx} className="relative">
+                    {/* Connecting Line */}
+                    {idx > 0 && (
+                      <div className="absolute -left-6 top-0 w-px h-8 bg-accent/30"></div>
+                    )}
+                    
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 mb-4">
+                      <h4 className="text-xl font-semibold text-accent">
+                        {role.role}
+                      </h4>
+                      <span className="font-mono text-sm text-dark-text-secondary/70 px-3 py-1 bg-dark-card/50 rounded-full border border-dark-text-secondary/20">
+                        {role.period}
+                      </span>
+                    </div>
 
-            <div className="space-y-8">
-              {activeExperience.roles.map((role, idx) => (
-                <div key={idx}>
-                  <h4 className="text-xl font-semibold text-dark-text">
-                    {role.role}
-                  </h4>
-
-                  <p className="font-mono text-sm mb-3 text-dark-text-secondary">
-                    {role.period}
-                  </p>
-
-                  <ul className="space-y-3">
-                    {role.tasks.map((task, i) => (
-                      <li key={i} className="flex">
-                        <span className="text-accent mr-4">▹</span>
-                        <span>{task}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+                    <ul className="space-y-4">
+                      {role.tasks.map((task, i) => (
+                        <li key={i} className="flex items-start group">
+                          <span className="text-accent mr-4 text-lg mt-0.5 group-hover:scale-125 transition-transform duration-200">▹</span>
+                          <span className="text-dark-text-secondary leading-relaxed group-hover:text-dark-text transition-colors duration-200">
+                            {task}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
             </div>
-
           </div>
         </div>
 

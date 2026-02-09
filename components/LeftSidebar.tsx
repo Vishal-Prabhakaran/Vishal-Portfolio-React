@@ -4,15 +4,14 @@ const socialLinks = [
   {
     name: 'GitHub',
     url: 'https://github.com/Vishal-Prabhakaran',
-    hoverColor: 'hover:text-[#6e5494]', // GitHub purple
+    color: 'hover:text-gray-100',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" role="img" 
         viewBox="0 0 24 24" fill="none" stroke="currentColor" 
         strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
         className="h-5 w-5">
         <title>GitHub</title>
-        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 
-        0 0 0-.94-2.61c3.14-.35 6.44-1.54 
+        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 
         6.44-7A5.44 5.44 0 0 0 20 4.77 
         5.07 5.07 0 0 0 19.91 1S18.73.65 
         16 2.48a13.38 13.38 0 0 0-7 
@@ -27,7 +26,7 @@ const socialLinks = [
   {
     name: 'LinkedIn',
     url: 'https://www.linkedin.com/in/vishal-p-276385348/',
-    hoverColor: 'hover:text-[#0A66C2]', // LinkedIn blue
+    color: 'hover:text-blue-400',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" role="img"
         viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -46,7 +45,7 @@ const socialLinks = [
   {
     name: 'Instagram',
     url: 'https://www.instagram.com/vk_tamizhan_vishal/',
-    hoverColor: 'hover:text-[#E1306C]', // Instagram pink/magenta
+    color: 'hover:text-pink-400',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" role="img"
         viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -64,24 +63,29 @@ const socialLinks = [
 
 const LeftSidebar: React.FC = () => {
   return (
-    <div className="hidden md:flex flex-col items-center fixed bottom-0 left-12 w-10 z-10">
-      <ul className="flex flex-col items-center space-y-6">
-        {socialLinks.map((link) => (
-          <li key={link.name}>
-            <a
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`text-dark-text-secondary transition-all duration-300 hover:-translate-y-1 block ${link.hoverColor}`}
-              aria-label={link.name}
-            >
-              {link.icon}
-            </a>
-          </li>
-        ))}
-      </ul>
-      <div className="w-px h-24 bg-dark-text-secondary mt-6"></div>
-    </div>
+    <>
+      {/* Desktop Left Sidebar - shows on lg and above */}
+      <div className="hidden lg:flex flex-col items-center fixed bottom-0 left-4 lg:left-8 w-10 z-10">
+        <ul className="flex flex-col items-center space-y-6">
+          {socialLinks.map((link) => (
+            <li key={link.name}>
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${link.color} transition-all duration-300 hover:-translate-y-1 block p-2 rounded-lg hover:bg-white/10`}
+                aria-label={link.name}
+              >
+                {link.icon}
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div className="w-px h-24 bg-[#64ffda]/20 mt-6 relative">
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-[#64ffda] rounded-full"></div>
+        </div>
+      </div>
+    </>
   );
 };
 
