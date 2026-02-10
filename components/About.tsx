@@ -136,7 +136,7 @@ const About: React.FC = () => {
                 <img
                   src="/vishal.jpeg"
                   alt="Vishal P."
-                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 filter grayscale group-hover:grayscale-0"
+                  className="w-full h-full object-cover  transition-all duration-500 group-hover:scale-105 filter grayscale group-hover:grayscale-0"
                 />
                 
                 {/* Overlay on Hover */}
