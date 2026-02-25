@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-     "build:css": "tailwindcss -i ./styles/tailwind.css -o ./styles/output.css --watch",
-  "build": "tailwindcss -i ./styles/tailwind.css -o ./styles/output.css --minify && vite build"
+    "build:css": "tailwindcss -i ./styles/tailwind.css -o ./styles/output.css --watch",
+    "build": "tailwindcss -i ./styles/tailwind.css -o ./styles/output.css --minify && vite build"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
@@ -17,9 +17,10 @@
     "@tailwindcss/cli": "^4.1.17",
     "@types/node": "^22.14.0",
     "@vitejs/plugin-react": "^5.0.0",
-    "autoprefixer": "^10.4.22",
+    "autoprefixer": "^10.4.24",
+    "baseline-browser-mapping": "^2.10.0",
     "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.17",
+    "tailwindcss": "^4.2.1",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
   }
