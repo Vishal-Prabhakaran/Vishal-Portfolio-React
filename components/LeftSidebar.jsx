@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const socialLinks = [
   {
@@ -61,11 +62,16 @@ const socialLinks = [
   },
 ];
 
-const LeftSidebar: React.FC = () => {
+const LeftSidebar = () => {
   return (
     <>
       {/* Desktop Left Sidebar - shows on lg and above */}
-      <div className="hidden lg:flex flex-col items-center fixed bottom-0 left-4 lg:left-8 w-10 z-10">
+      <motion.div 
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 1 }}
+        className="hidden lg:flex flex-col items-center fixed bottom-0 left-4 lg:left-8 w-10 z-40"
+      >
         <ul className="flex flex-col items-center space-y-6">
           {socialLinks.map((link) => (
             <li key={link.name}>
@@ -84,7 +90,7 @@ const LeftSidebar: React.FC = () => {
         <div className="w-px h-24 bg-[#64ffda]/20 mt-6 relative">
           <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-[#64ffda] rounded-full"></div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 };

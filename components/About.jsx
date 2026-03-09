@@ -1,7 +1,15 @@
 import React from "react";
-import { useScrollAnimation } from "../hooks/useScrollAnimation";
+import { motion } from "framer-motion";
 
 const technologies = [
+  {
+    name: "Ant Design",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/antdesign/antdesign-original.svg",
+  },
+  {
+    name: "JavaScript",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
+  },
   {
     name: "Angular",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg",
@@ -44,7 +52,7 @@ const technologies = [
   },
   {
     name: "AWS",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg",
+    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
   },
   {
     name: "C#",
@@ -52,53 +60,69 @@ const technologies = [
   },
 ];
 
-const About: React.FC = () => {
-  const [ref, isVisible] = useScrollAnimation<HTMLDivElement>();
+const About = () => {
+  const containerVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { duration: 0.8, ease: "easeOut", staggerChildren: 0.2 }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+  };
 
   return (
-    <section ref={ref} id="about" className="py-24 md:py-32 relative">
+    <section id="about" className="py-24 md:py-32 relative">
       {/* Background Effects */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
 
-      <div
-        className={`relative z-10 transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+      <motion.div
+        className="relative z-10"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
       >
-        <h2 className="text-3xl font-bold text-dark-text mb-8 font-mono flex items-center">
+        <motion.h2 variants={itemVariants} className="text-3xl font-bold text-dark-text mb-8 font-mono flex items-center">
           <span className="text-accent mr-4">01.</span>
-          <span className="gradient-text">About Me</span>
+          <span className="react-bits-text">About Me</span>
           <span className="ml-6 h-px w-24 md:w-64 bg-dark-text-secondary/30"></span>
-        </h2>
+        </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-5 gap-12 items-start">
           {/* Left Section - About Text */}
           <div className="md:col-span-3 text-lg">
-            <p className="mb-6 text-dark-text-secondary leading-relaxed">
-              I'm a <span className="text-accent font-medium">passionate and highly motivated</span> Full Stack Web Developer 
-              with a solid foundation in front-end and back-end technologies.
-              I'm proficient in HTML, CSS, JavaScript, and frameworks like 
-              <span className="text-accent"> Angular</span>,<span className="text-accent"> React</span> and <span className="text-accent">Node.js</span>.
-            </p>
-            <p className="mb-6 text-dark-text-secondary leading-relaxed">
-              I am skilled in database management with <span className="text-accent">SQL</span> and <span className="text-accent">NoSQL</span> systems,
-              and experienced in building responsive, user-friendly web
-              applications. I possess strong problem-solving skills and a keen
-              ability to learn new technologies quickly. I have completed my
-              Bachelor's degree in Computer Science at Mannar Thirumalai Naicker
-              College, with graduation expected in April 2026.
-            </p>
-
-            <p className="mb-8 text-dark-text-secondary leading-relaxed">
-              My goal is to create impactful web solutions, focused on
-              delivering clean, maintainable code while adhering to industry
-              best practices. Here are a few technologies I've been working with
-              recently:
-            </p>
+            <motion.p variants={itemVariants} className="mb-6 text-dark-text-secondary leading-relaxed">
+              I am a <span className="text-accent font-medium">Full Stack Web Developer</span> focused on building efficient, scalable, and user-friendly web applications. 
+              My experience covers the full web development stack, working with core technologies such as HTML, CSS, and <span className="text-accent">JavaScript</span>. 
+              On the frontend, I build responsive and dynamic user interfaces using <span className="text-accent">React</span> and component libraries like <span className="text-accent">Ant Design</span>.
+            </motion.p>
+            <motion.p variants={itemVariants} className="mb-6 text-dark-text-secondary leading-relaxed">
+              On the backend, I develop server-side applications using <span className="text-accent">C#</span> and <span className="text-accent">ASP.NET</span>, along with <span className="text-accent">Node.js</span> when required. I work with databases such as <span className="text-accent">MySQL</span> to design structured, reliable, and scalable data systems.
+            </motion.p>
+            <motion.p variants={itemVariants} className="mb-6 text-dark-text-secondary leading-relaxed">
+              I focus on writing clean, maintainable code and building practical solutions to real-world problems. I regularly explore new technologies and improve my development practices to stay aligned with modern web development standards.
+            </motion.p>
+            <motion.p variants={itemVariants} className="mb-8 text-dark-text-secondary leading-relaxed">
+              I have completed my Bachelor’s degree in Computer Science at Mannar Thirumalai Naicker College. My goal is to develop reliable web applications that provide strong performance and a seamless user experience.
+            </motion.p>
+            <motion.p variants={itemVariants} className="mb-8 text-dark-text-secondary leading-relaxed font-semibold">
+              Technologies I work with include:
+            </motion.p>
 
             {/* Technologies Grid */}
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-6">
-              {technologies.map((tech) => (
-                <div
+            <motion.div variants={itemVariants} className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-6">
+              {technologies.map((tech, index) => (
+                <motion.div
                   key={tech.name}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: index * 0.05, duration: 0.3 }}
+                  viewport={{ once: true }}
                   className="group flex flex-col items-center justify-center p-4 rounded-xl bg-dark-card/50 border border-dark-text-secondary/10 transition-all duration-300 hover:bg-dark-card hover:border-accent/30 hover:-translate-y-2 card-hover"
                   title={tech.name}
                 >
@@ -113,13 +137,16 @@ const About: React.FC = () => {
                   <span className="mt-3 text-xs text-center font-mono text-dark-text-secondary group-hover:text-accent transition-colors duration-300">
                     {tech.name}
                   </span>
-                </div>
+                </motion.div>
               ))}
-            </div>
+            </motion.div>
           </div>
 
           {/* Right Section - Image */}
-          <div className="md:col-span-2 relative group w-full max-w-sm mx-auto">
+          <motion.div 
+            variants={itemVariants}
+            className="md:col-span-2 relative group w-full max-w-sm mx-auto"
+          >
             {/* Decorative Elements */}
             <div className="absolute -inset-4 bg-accent/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             
@@ -135,7 +162,7 @@ const About: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent pointer-events-none"></div>
                 <img
                   src="/vishal.jpeg"
-                  alt="Vishal P."
+                  alt="Vishal P"
                   className="w-full h-full object-cover  transition-all duration-500 group-hover:scale-105 filter grayscale group-hover:grayscale-0"
                 />
                 
@@ -149,9 +176,9 @@ const About: React.FC = () => {
               <div className="absolute -top-2 -right-2 w-6 h-6 border-t-2 border-r-2 border-accent/50 rounded-tr-lg"></div>
               <div className="absolute -bottom-2 -left-2 w-6 h-6 border-b-2 border-l-2 border-accent/50 rounded-bl-lg"></div>
             </div>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

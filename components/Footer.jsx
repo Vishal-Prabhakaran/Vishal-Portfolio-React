@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Footer: React.FC = () => {
+const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
         </div>
 
         <p className="font-mono text-sm text-dark-text-secondary mb-4">
-          <span className="text-accent">Designed & Built</span> by Vishal P.
+          <span className="text-accent">Designed &amp; Built</span> by Vishal
         </p>
         
         <p className="font-mono text-xs text-dark-text-secondary/50">
@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
         <div className="mt-6 flex items-center justify-center gap-2 flex-wrap">
           <span className="text-xs text-dark-text-secondary/40">Built with</span>
           <span className="text-xs px-2 py-1 rounded bg-dark-card/50 border border-accent/10 text-accent font-mono">React</span>
-          <span className="text-xs px-2 py-1 rounded bg-dark-card/50 border border-accent/10 text-accent font-mono">TypeScript</span>
+          <span className="text-xs px-2 py-1 rounded bg-dark-card/50 border border-accent/10 text-accent font-mono">JavaScript</span>
           <span className="text-xs px-2 py-1 rounded bg-dark-card/50 border border-accent/10 text-accent font-mono">Tailwind</span>
         </div>
       </div>

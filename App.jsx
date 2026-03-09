@@ -11,9 +11,10 @@ import LeftSidebar from './components/LeftSidebar';
 import RightSidebar from './components/RightSidebar';
 import MobileBottomNav from './components/MobileBottomNav';
 
-const App: React.FC = () => {
+const App = () => {
   return (
     <div className="flex flex-col min-h-screen relative">
+      
       {/* Global Background Effects */}
       <div className="fixed inset-0 pointer-events-none z-0">
         {/* Grid Pattern */}

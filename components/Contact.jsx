@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { useScrollAnimation } from '../hooks/useScrollAnimation';
+import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 
-const Contact: React.FC = () => {
-  const [ref, isVisible] = useScrollAnimation<HTMLDivElement>();
+const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
 
   const [loading, setLoading] = useState(false);
@@ -12,24 +11,24 @@ const Contact: React.FC = () => {
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
 
     emailjs
       .send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID!,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID!,
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         {
           from_name: formData.name,
           reply_to: formData.email,
           message: formData.message,
         },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY!
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       )
       .then(() => {
         setLoading(false);
@@ -54,7 +53,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section ref={ref} id="contact" className="py-24 md:py-48 text-center relative pb-28 md:pb-48">
+    <section id="contact" className="py-24 md:py-48 text-center relative pb-28 md:pb-48">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none"></div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
@@ -73,8 +72,13 @@ const Contact: React.FC = () => {
         </div>
       )}
 
-      <div className={`relative z-10 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-        
+      <motion.div 
+        initial={{ opacity: 0, scale: 0.9, y: 30 }}
+        whileInView={{ opacity: 1, scale: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10"
+      >
         <p className="text-accent font-mono mb-4 flex items-center justify-center gap-3">
           <span className="w-8 h-px bg-accent/40"></span>
           04. What's Next?
@@ -82,7 +86,7 @@ const Contact: React.FC = () => {
         </p>
         
         <h2 className="text-4xl md:text-5xl font-bold text-dark-text mb-6">
-          <span className="gradient-text">Get In Touch</span>
+          <span className="react-bits-text">Get In Touch</span>
         </h2>
 
         <p className="max-w-xl mx-auto mb-12 text-dark-text-secondary leading-relaxed">
@@ -91,7 +95,7 @@ const Contact: React.FC = () => {
         </p>
 
         {/* FORM */}
-        <form onSubmit={handleSubmit} className="max-w-xl mx-auto relative">
+        <form onSubmit={handleSubmit} className="max-w-xl mx-auto relative text-left">
           {/* Decorative Elements */}
           <div className="absolute -inset-1 bg-gradient-to-r from-accent via-accent-light to-accent opacity-0 rounded-xl blur-lg transition-opacity duration-500 group-hover:opacity-30"></div>
           
@@ -192,7 +196,7 @@ const Contact: React.FC = () => {
             </button>
           </div>
         </form>
-      </div>
+      </motion.div>
 
       {/* ANIMATIONS */}
       <style>{`
