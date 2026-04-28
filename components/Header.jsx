@@ -79,7 +79,7 @@ const Header = () => {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 0.6 }}
-            href="/Vishal_Resume.pdf"
+            href={`${import.meta.env.BASE_URL}Vishal_Resume.pdf`}
             download="Vishal_Resume.pdf"
             className="ml-4 font-mono text-sm border border-accent text-accent px-5 py-2 rounded-lg hover:bg-accent hover:text-dark-bg transition-all duration-300 btn-primary"
           >
@@ -144,7 +144,7 @@ const Header = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
-                href="/Vishal_Resume.pdf"
+                href={`${import.meta.env.BASE_URL}Vishal_Resume.pdf`}
                 download="Vishal_Resume.pdf"
                 className="mt-8 font-mono text-lg border-2 border-accent text-accent px-8 py-3 rounded-lg hover:bg-accent hover:text-dark-bg transition-all duration-300"
               >

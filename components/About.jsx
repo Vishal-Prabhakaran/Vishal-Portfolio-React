@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import vishalImage from '../assets/vishal.jpeg';
 
 const technologies = [
   {
@@ -11,20 +12,8 @@ const technologies = [
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-original.svg",
   },
   {
-    name: "Angular",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg",
-  },
-  {
     name: "React",
     icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
-  },
-  {
-    name: "TypeScript",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
-  },
-  {
-    name: "Node.js",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
   },
   {
     name: "C# & .NET",
@@ -161,9 +150,9 @@ const About = () => {
               <div className="relative rounded-2xl overflow-hidden bg-dark-bg">
                 <div className="absolute inset-0 bg-gradient-to-br from-accent/10 to-transparent pointer-events-none"></div>
                 <img
-                  src="/vishal.jpeg"
+                  src={vishalImage}
                   alt="Vishal P"
-                  className="w-full h-full object-cover  transition-all duration-500 group-hover:scale-105 filter grayscale group-hover:grayscale-0"
+                  className="w-full h-full object-cover transition-all duration-500 group-hover:scale-105 filter grayscale group-hover:grayscale-0"
                 />
                 
                 {/* Overlay on Hover */}
