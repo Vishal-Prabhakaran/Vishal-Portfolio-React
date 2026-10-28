@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 
 const Contact = () => {
@@ -53,27 +53,28 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 md:py-48 text-center relative pb-28 md:pb-48">
+    <section id="contact" className="py-24 md:py-40 text-center relative pb-28 md:pb-40">
       {/* Background Effects */}
       <div className="absolute inset-0 bg-grid-pattern pointer-events-none"></div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full max-w-2xl h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none"></div>
 
       {/* TOAST */}
-      {showToast && (
-        <div className="
-          fixed top-6 right-6 z-50
-          bg-dark-card border border-accent/40 
-          px-6 py-4 rounded-xl shadow-lg text-accent font-mono text-sm
-          animate-slide-in
-          flex items-center gap-3
-        ">
-          <span className="text-lg">{toastMessage.includes('✓') ? '🎉' : '⚠️'}</span>
-          {toastMessage}
-        </div>
-      )}
+      <AnimatePresence>
+        {showToast && (
+          <motion.div
+            initial={{ opacity: 0, x: 30, y: -10 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
+            exit={{ opacity: 0, x: 30 }}
+            className="fixed top-6 right-6 z-50 bg-dark-card border border-accent/40 px-6 py-4 rounded-xl shadow-lg text-accent font-mono text-sm flex items-center gap-3"
+          >
+            <span className="text-lg">{toastMessage.includes('✓') ? '🎉' : '⚠️'}</span>
+            {toastMessage}
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <motion.div 
-        initial={{ opacity: 0, scale: 0.9, y: 30 }}
+        initial={{ opacity: 0, scale: 0.95, y: 30 }}
         whileInView={{ opacity: 1, scale: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
@@ -90,16 +91,13 @@ const Contact = () => {
         </h2>
 
         <p className="max-w-xl mx-auto mb-12 text-dark-text-secondary leading-relaxed">
-          I'm currently open to new opportunities and collaborations. Whether you have a question or just want to say hi,
+          I'm currently open to new opportunities and collaborations. Whether you have a question, a project idea, or just want to say hi,
           feel free to reach out — I'll get back to you!
         </p>
 
         {/* FORM */}
         <form onSubmit={handleSubmit} className="max-w-xl mx-auto relative text-left">
-          {/* Decorative Elements */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-accent via-accent-light to-accent opacity-0 rounded-xl blur-lg transition-opacity duration-500 group-hover:opacity-30"></div>
-          
-          <div className="relative bg-dark-card/80 backdrop-blur-sm p-8 md:p-10 rounded-2xl shadow-2xl border border-accent/10">
+          <div className="relative bg-dark-card/80 backdrop-blur-sm p-8 md:p-10 rounded-2xl shadow-2xl border border-accent/10 hover:border-accent/20 transition-colors duration-500">
             {/* Top Border Accent */}
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-accent via-accent-light to-accent rounded-t-2xl"></div>
             
@@ -200,12 +198,6 @@ const Contact = () => {
 
       {/* ANIMATIONS */}
       <style>{`
-        @keyframes slide-in {
-          0% { opacity: 0; transform: translateX(30px); }
-          100% { opacity: 1; transform: translateX(0); }
-        }
-        .animate-slide-in { animation: slide-in 0.4s ease forwards; }
-
         @keyframes checkmark {
           0% { transform: scale(0); opacity: 0; }
           60% { transform: scale(1.2); opacity: 1; }

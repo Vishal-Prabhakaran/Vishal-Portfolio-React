@@ -4,11 +4,34 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Track active section
+  useEffect(() => {
+    const sections = ['about', 'experience', 'projects', 'contact'];
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      { rootMargin: '-40% 0px -60% 0px' }
+    );
+
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   const navLinks = [
@@ -25,8 +48,10 @@ const Header = () => {
     if (isMenuOpen) setIsMenuOpen(false);
   };
 
-  const linkClasses =
-    "relative cursor-pointer text-dark-text-secondary hover:text-accent transition-colors duration-300 px-4 py-2 rounded-md font-mono text-sm group";
+  const linkClasses = (id) =>
+    `relative cursor-pointer transition-colors duration-300 px-4 py-2 rounded-md font-mono text-sm group ${
+      activeSection === id ? 'text-accent' : 'text-dark-text-secondary hover:text-accent'
+    }`;
   
   const mobileLinkClasses =
     "block cursor-pointer text-dark-text hover:text-accent transition-colors duration-300 py-4 text-center text-lg font-mono relative";
@@ -68,11 +93,11 @@ const Header = () => {
               key={link.id}
               href={`#${link.id}`}
               onClick={(e) => handleNavClick(e, link.id)}
-              className={linkClasses}
+              className={linkClasses(link.id)}
             >
               <span className="text-accent font-mono text-xs mr-1 opacity-60">0{index + 1}.</span>
               {link.name}
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
+              <span className={`absolute bottom-0 left-0 h-0.5 bg-accent transition-all duration-300 ${activeSection === link.id ? 'w-full' : 'w-0 group-hover:w-full'}`}></span>
             </motion.a>
           ))}
           <motion.a
@@ -137,7 +162,6 @@ const Header = () => {
                 >
                   <span className="text-accent font-mono text-sm mr-2">0{index + 1}.</span>
                   {link.name}
-                  <span className="absolute bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0.5 bg-accent transition-all duration-300 group-hover:w-full"></span>
                 </motion.a>
               ))}
               <motion.a

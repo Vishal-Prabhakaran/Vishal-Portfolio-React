@@ -3,22 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const experiences = [
   {
-    company: "Pencil Walk private limited",
-    roles: [
-      {
-        role: "Web Development Intern",
-        period: "Internship",
-        tasks: [
-          "Worked with a team to build and maintain web applications using HTML, CSS, JavaScript, and PHP.",
-          "Gained hands-on experience in real-time project development cycles and agile methodologies.",
-          "Enhanced web development skills by applying them to practical, industry-level tasks.",
-          "Contributed to creating responsive and user-friendly web interfaces for various clients."
-        ]
-      }
-    ]
-  },
-  {
-    company: "E2o technologies",
+    company: "E2o Technologies",
     roles: [
       {
         role: "Junior Software Developer",
@@ -38,6 +23,21 @@ const experiences = [
           "Gained practical experience with Angular, .NET, and agile development methodologies.",
           "Contributed to bug fixing and improving application performance.",
           "Participated in code reviews to maintain code quality and learn from senior developers."
+        ]
+      }
+    ]
+  },
+  {
+    company: "Pencil Walk Pvt Ltd",
+    roles: [
+      {
+        role: "Web Development Intern",
+        period: "Internship",
+        tasks: [
+          "Worked with a team to build and maintain web applications using HTML, CSS, JavaScript, and PHP.",
+          "Gained hands-on experience in real-time project development cycles and agile methodologies.",
+          "Enhanced web development skills by applying them to practical, industry-level tasks.",
+          "Contributed to creating responsive and user-friendly web interfaces for various clients."
         ]
       }
     ]
@@ -81,16 +81,16 @@ const Experience = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
       >
-        <motion.h2 variants={itemVariants} className="text-3xl font-bold text-dark-text mb-8 font-mono flex items-center">
+        <motion.h2 variants={itemVariants} className="text-3xl font-bold text-dark-text mb-12 font-mono flex items-center">
           <span className="text-accent mr-4">02.</span>
           <span className="react-bits-text">Where I've Worked</span>
           <span className="ml-6 h-px w-24 md:w-64 bg-dark-text-secondary/30"></span>
         </motion.h2>
 
-        <div className="flex flex-col md:flex-row min-h-[300px]">
+        <div className="flex flex-col md:flex-row min-h-[350px] gap-1">
 
           {/* LEFT SIDE TABS */}
-          <motion.div variants={itemVariants} className="flex md:flex-col overflow-x-auto md:overflow-visible border-b-2 md:border-b-0 md:border-l-2 border-dark-card mb-6 md:mb-0 md:mr-6">
+          <motion.div variants={itemVariants} className="flex md:flex-col overflow-x-auto md:overflow-visible border-b-2 md:border-b-0 md:border-l-2 border-dark-card mb-6 md:mb-0 md:mr-8 shrink-0">
             {experiences.map((exp, index) => (
               <button
                 key={exp.company}
@@ -133,23 +133,26 @@ const Experience = () => {
                 exit="exit"
                 className="relative"
               >
-                <h3 className="text-2xl font-bold text-dark-text mb-2">
+                <h3 className="text-2xl font-bold text-dark-text mb-2 flex items-center gap-3">
                   {activeExperience.company}
+                  {activeTab === 0 && (
+                    <span className="text-xs font-mono text-green-400 bg-green-400/10 border border-green-400/20 px-2 py-0.5 rounded-full">
+                      Current
+                    </span>
+                  )}
                 </h3>
                 
-                <div className="space-y-8">
+                <div className="space-y-8 mt-6">
                   {activeExperience.roles.map((role, idx) => (
-                    <div key={idx} className="relative">
-                      {/* Connecting Line */}
-                      {idx > 0 && (
-                        <div className="absolute -left-6 top-0 w-px h-8 bg-accent/30"></div>
-                      )}
+                    <div key={idx} className="relative pl-4 border-l-2 border-accent/20">
+                      {/* Timeline dot */}
+                      <div className="absolute -left-[9px] top-1 w-4 h-4 bg-dark-bg border-2 border-accent rounded-full" />
                       
                       <div className="flex flex-col sm:flex-row sm:items-center sm:gap-4 mb-4">
                         <h4 className="text-xl font-semibold text-accent">
                           {role.role}
                         </h4>
-                        <span className="font-mono text-sm text-dark-text-secondary/70 px-3 py-1 bg-dark-card/50 rounded-full border border-dark-text-secondary/20">
+                        <span className="font-mono text-sm text-dark-text-secondary/70 px-3 py-1 bg-dark-card/50 rounded-full border border-dark-text-secondary/20 w-fit">
                           {role.period}
                         </span>
                       </div>
