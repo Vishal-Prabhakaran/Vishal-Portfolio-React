@@ -14,7 +14,7 @@ const MobileBottomNav = () => {
     },
     {
       name: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/vishal-p-276385348/',
+      url: 'https://www.linkedin.com/in/vishal-prabhakaran18/',
       color: 'text-blue-400 hover:text-blue-300',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
@@ -26,7 +26,7 @@ const MobileBottomNav = () => {
     },
     {
       name: 'Instagram',
-      url: 'https://www.instagram.com/vk_tamizhan_vishal/',
+      url: 'https://www.instagram.com/vishal_prabhakaran_/',
       color: 'text-pink-400 hover:text-pink-300',
       icon: (
         <svg xmlns="http://www.w3.org/2000/svg" role="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">

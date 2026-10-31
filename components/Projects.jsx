@@ -1,8 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import oncallImage from '../assets/image.png';
+import ahlloImage from '../assets/ahllo.png';
 
 const projects = [
+  {
+    title: 'Ahllo',
+    role: 'Team Lead',
+    description: 'A scalable SaaS consultation and live session platform enabling professionals, experts, trainers, and businesses to monetize their knowledge through 1-on-1 consultations (instant or scheduled), webinars with recording sessions, and interactive live meetings. Architected across 3 key layers: Discovery (Public Profiles), Booking (Custom Forms, Scheduling & Automated Split Payments via Razorpay Route), and Meeting (Video, Real-time Chat & Cloud Recording).',
+    tags: ['React', 'Node.js', 'Razorpay Route', 'WebRTC', 'SaaS', 'Tailwind CSS'],
+    imageUrl: ahlloImage,
+    imageFit: 'object-contain p-6 md:p-8 bg-dark-card',
+    liveUrl: 'https://www.ahllo.com',
+    featured: true,
+  },
   {
     title: 'OnCallActingDriver Platform',
     description: 'A comprehensive platform connecting users with professional acting drivers for safe and reliable transportation services. Built with a scalable architecture and modern UI/UX best practices.',
@@ -51,21 +62,28 @@ const FeaturedProject = ({ project, index }) => {
       <div className={`grid grid-cols-1 lg:grid-cols-12 gap-4 items-center ${isEven ? '' : 'lg:direction-rtl'}`}>
         {/* Image Side */}
         <div className={`lg:col-span-7 relative group ${isEven ? 'lg:order-1' : 'lg:order-2'}`}>
-          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="block relative rounded-xl overflow-hidden">
+          <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="block relative rounded-xl overflow-hidden bg-dark-card border border-dark-text-secondary/10">
             {/* Overlay */}
             <div className="absolute inset-0 bg-accent/20 mix-blend-multiply group-hover:bg-transparent transition-all duration-500 z-10 rounded-xl" />
             <div className="absolute inset-0 bg-dark-bg/40 group-hover:bg-dark-bg/10 transition-all duration-500 z-10 rounded-xl" />
             <img 
               src={project.imageUrl} 
               alt={project.title}
-              className="w-full h-64 md:h-80 object-cover rounded-xl transition-transform duration-700 group-hover:scale-105"
+              className={`w-full h-64 md:h-80 ${project.imageFit || 'object-cover'} rounded-xl transition-transform duration-700 group-hover:scale-105`}
             />
           </a>
         </div>
 
         {/* Content Side */}
         <div className={`lg:col-span-5 relative z-20 ${isEven ? 'lg:order-2 lg:-ml-16' : 'lg:order-1 lg:-mr-16'} ${isEven ? 'lg:text-right' : 'lg:text-left'}`}>
-          <p className="text-accent font-mono text-sm mb-2">Featured Project</p>
+          <div className={`flex items-center gap-3 mb-2 ${isEven ? 'lg:justify-end' : 'lg:justify-start'}`}>
+            <p className="text-accent font-mono text-sm">Featured Project</p>
+            {project.role && (
+              <span className="text-xs font-mono px-2.5 py-0.5 rounded-full bg-accent/10 text-accent border border-accent/20">
+                {project.role}
+              </span>
+            )}
+          </div>
           <h3 className="text-2xl md:text-3xl font-bold text-dark-text mb-4 hover:text-accent transition-colors duration-300">
             <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
               {project.title}

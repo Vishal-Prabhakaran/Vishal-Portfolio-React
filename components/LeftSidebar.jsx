@@ -26,7 +26,7 @@ const socialLinks = [
   },
   {
     name: 'LinkedIn',
-    url: 'https://www.linkedin.com/in/vishal-p-276385348/',
+    url: 'https://www.linkedin.com/in/vishal-prabhakaran18/',
     color: 'hover:text-blue-400',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" role="img"
@@ -45,7 +45,7 @@ const socialLinks = [
   },
   {
     name: 'Instagram',
-    url: 'https://www.instagram.com/vk_tamizhan_vishal/',
+    url: 'https://www.instagram.com/vishal_prabhakaran_/',
     color: 'hover:text-pink-400',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" role="img"
